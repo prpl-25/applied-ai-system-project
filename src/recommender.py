@@ -66,14 +66,14 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     Scores a single song using the README formula and returns a score with reasons.
 
     Formula:
-    score = 2 * genre_score + 1 * mood_score + 2 * energy_similarity
+    score = 1 * genre_score + 1 * mood_score + 4 * energy_similarity
     where energy_similarity = 1 - abs(song_energy - user_energy)
     """
     reasons: List[str] = []
 
     genre_score = 1.0 if song.get("genre") == user_prefs.get("genre") else 0.0
     if genre_score == 1.0:
-        reasons.append("genre match (+2.0)")
+        reasons.append("genre match (+1.0)")
     else:
         reasons.append("genre mismatch (+0.0)")
 
@@ -87,12 +87,12 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     song_energy = float(song.get("energy", 0.5))
     energy_similarity = 1.0 - abs(song_energy - user_energy)
     energy_similarity = max(0.0, min(1.0, energy_similarity))
-    energy_points = 2.0 * energy_similarity
+    energy_points = 4.0 * energy_similarity
     reasons.append(
         f"energy closeness {energy_similarity:.2f} (+{energy_points:.2f})"
     )
 
-    total_score = 2.0 * genre_score + 1.0 * mood_score + energy_points
+    total_score = 1.0 * genre_score + 1.0 * mood_score + energy_points
     return total_score, reasons
 
 def load_songs(csv_path: str) -> List[Dict]:
