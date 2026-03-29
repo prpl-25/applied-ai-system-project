@@ -23,10 +23,15 @@ Some prompts to answer:
 
 - What features does each `Song` use in your system
   - For example: genre, mood, energy, tempo
+  In my system, each song uses mood, genre, and energy features.
 - What information does your `UserProfile` store
+  My UserProfile stores the user's preferred genre, mood, energy level Their skips and listens are also stored to track their interactions with the recommended songs.
 - How does your `Recommender` compute a score for each song
+  The scoring rule helps score each song. It uses the following formula: It prioritizes mood and energy over other metrics.
+  score = 2 * genre_score + 1 * mood_score + 2 * energy_score 
+  where genre_score, mood_score are set 1 if the song's genre or mood matches the user's preference, and 0 otherwise. The energy_score, is calculated based on how close the song's energy is to the user's preferred levels.
 - How do you choose which songs to recommend
-
+  The system computes a score for each song in the catalog based on the user's profile and then recommends the top k songs with the highest scores.
 You can include a simple diagram or bullet list if helpful.
 
 ---

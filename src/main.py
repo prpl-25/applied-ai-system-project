@@ -14,19 +14,21 @@ from recommender import load_songs, recommend_songs
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
-
+    print(f"Loaded {len(songs)} songs from the dataset.")  
     # Starter example profile
     user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
 
     recommendations = recommend_songs(user_prefs, songs, k=5)
 
-    print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, explanation)
+    print("\n" + "="*60)
+    print("TOP MUSIC RECOMMENDATIONS")
+    print("="*60 + "\n")
+    
+    for i, rec in enumerate(recommendations, 1):
         song, score, explanation = rec
-        print(f"{song['title']} - Score: {score:.2f}")
-        print(f"Because: {explanation}")
+        print(f"{i}. {song['title']}")
+        print(f"   Score: {score:.2f}/10")
+        print(f"   Why: {explanation}")
         print()
 
 
