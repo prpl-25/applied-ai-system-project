@@ -70,7 +70,7 @@ Prompts:
 - Cases where the system overfits to one preference
 - Ways the scoring might unintentionally favor some users
 
-Earlier genres were more represented and energy was underrepresented. After running the data experiment, energy domintes the scoring. It weights energy at 4, while genre and mood are weighted at 1.
+Earlier, genres were more represented and energy was underrepresented. After running the data experiment, energy dominates the scoring. It weights energy at 4, while genre and mood are weighted at 1.
 The system also looks for exact genre and mood matches, which may not capture users with more flexible tastes. For example, calm and chill can be similar moods, but the system treats them as completely different.
 Additionally, the dataset has sparse coverage of some tastes like rocj, jazz, and indie pop. It also has a uneven distribution of moods - chill appears multiple times, while focused only appears once. This could lead to recommendations that favor more common genres and moods, while neglecting niche preferences.
 
