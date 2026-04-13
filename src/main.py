@@ -1,13 +1,20 @@
 """
 Command line runner for the Music Recommender Simulation.
 
-This file helps you quickly run and test your recommender.
+Usage:
+  python src/main.py            # Classic mode: run scoring-based recommendations
+  python src/main.py --ai       # AI mode: conversational RAG + agentic workflow
+                                 # (requires ANTHROPIC_API_KEY environment variable)
 
-You will implement the functions in recommender.py:
+Classic mode implements the functions in recommender.py:
 - load_songs
 - score_song
 - recommend_songs
 """
+
+import argparse
+import logging
+import os
 
 from recommender import load_songs, recommend_songs
 
@@ -37,4 +44,38 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Music Recommender")
+    parser.add_argument(
+        "--ai",
+        action="store_true",
+        help="Launch conversational AI mode (requires ANTHROPIC_API_KEY)",
+    )
+    args = parser.parse_args()
+
+    if args.ai:
+        try:
+            import anthropic
+            from ai_recommender import run_ai_session
+        except ImportError:
+            print("ERROR: anthropic package not installed. Run: pip install anthropic")
+            raise SystemExit(1)
+
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            print("ERROR: ANTHROPIC_API_KEY environment variable is not set.")
+            raise SystemExit(1)
+
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            handlers=[
+                logging.FileHandler("ai_recommender.log"),
+                logging.StreamHandler(),
+            ],
+        )
+
+        songs = load_songs("data/songs.csv")
+        client = anthropic.Anthropic(api_key=api_key)
+        run_ai_session(songs, client)
+    else:
+        main()

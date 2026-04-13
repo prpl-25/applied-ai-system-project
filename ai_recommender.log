@@ -1,0 +1,8 @@
+2026-04-12 20:29:46,255 [INFO] ai_recommender: AI session started with 10 songs in catalog.
+2026-04-12 20:29:58,355 [INFO] ai_recommender: User query: Give me a high energy workout music
+2026-04-12 20:29:58,694 [INFO] httpx: HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
+2026-04-12 20:29:58,696 [ERROR] ai_recommender: Authentication error: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011Ca14aEvwXd92ur1P4wqU7'}
+2026-04-12 20:30:26,511 [INFO] ai_recommender: AI session started with 10 songs in catalog.
+2026-04-12 20:30:38,872 [INFO] ai_recommender: User query: give me high energy workout music
+2026-04-12 20:30:39,150 [INFO] httpx: HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
+2026-04-12 20:30:39,152 [ERROR] ai_recommender: Authentication error: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011Ca14dE6RRtEDjqq2iq86V'}
